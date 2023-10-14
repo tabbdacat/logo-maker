@@ -29,3 +29,18 @@ const questions = [
         choices: ["red", "orange", "yellow", "green", "blue", "purple"]
     },
 ]
+
+// initializes the app
+function init() {
+    inquirer.prompt(questions)
+    .then(data => {
+        console.log(data);
+        // writes svg file
+        fs.writeFile('./logo.svg', shapes(data), (err) => {
+            err ? console.log(err) : console.log('Success! Check out your new logo.svg.') 
+});
+})
+}
+
+// Function call to initialize app
+init();
