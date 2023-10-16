@@ -1,0 +1,10 @@
+        <svg viewbox="0 0 300 200">
+
+        <circle cx="150" cy="100" r="75" fill="yellow" />
+
+
+
+        <text x="150" y="100" text-anchor="middle" alignment-baseline="middle" fill="brown" font-size="40">HI</text>
+
+
+</svg>
