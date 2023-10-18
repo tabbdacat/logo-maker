@@ -29,9 +29,11 @@ const questions = [
     },
 ]
 
+// function to generate svg content
 function generateSVG(shape, text, colorText, colorLogo) {
     let newShape;
 
+    // assigns to shape class per user input
     if(shape === 'square') {
         newShape = new Square(colorLogo);
     }
@@ -42,6 +44,7 @@ function generateSVG(shape, text, colorText, colorLogo) {
         newShape = new Triangle(colorLogo);
     }
 
+    // svg content 
     return ` 
     <svg viewbox="0 0 300 200"> 
     
@@ -49,7 +52,6 @@ function generateSVG(shape, text, colorText, colorLogo) {
 
     <text x="150" y="100" text-anchor="middle" alignment-baseline="middle" fill="${colorText}" font-size="40">${text}</text>
     `;
-
 }
 
 // initializes the app
