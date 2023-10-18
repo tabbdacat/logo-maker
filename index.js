@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const shapes = require("./lib/shapes");
-
+const {Triangle, Square, Circle} = require("./lib/shapes");
 
 // questions array
 const questions = [
@@ -13,7 +12,7 @@ const questions = [
     {
         type: 'list',
         message: 'What color do you want your text to be?',
-        name: 'color-text',
+        name: 'colorText',
         choices: ["red", "orange", "yellow", "green", "blue", "purple"]
     },
     {
@@ -25,21 +24,45 @@ const questions = [
     {
         type: 'list',
         message: 'What color do you want your logo to be?',
-        name: 'color-logo',
+        name: 'colorLogo',
         choices: ["red", "orange", "yellow", "green", "blue", "purple"]
     },
 ]
+
+function generateSVG(shape, text, colorText, colorLogo) {
+    let newShape;
+
+    if(shape === 'square') {
+        newShape = new Square(colorLogo);
+    }
+    if(shape === 'circle') {
+        newShape = new Circle(colorLogo);
+    }
+    if(shape === 'triangle') {
+        newShape = new Triangle(colorLogo);
+    }
+
+    return ` 
+    <svg viewbox="0 0 300 200"> 
+    
+    ${newShape.render()} 
+
+    <text x="150" y="100" text-anchor="middle" alignment-baseline="middle" fill="${colorText}" font-size="40">${text}</text>
+    `;
+
+}
 
 // initializes the app
 function init() {
     inquirer.prompt(questions)
     .then(data => {
         console.log(data);
+        generateSVG(data.shape, data.text, data.colorText, data.colorLogo);
         // writes svg file
-        fs.writeFile('./logo.svg', shapes(data), (err) => {
-            err ? console.log(err) : console.log('Success! Check out your new logo.svg.') 
-});
-})
+            fs.writeFile('./logo.svg', generateSVG(data.shape, data.text, data.colorText, data.colorLogo), (err) => {
+                err ? console.log(err) : console.log('Success! Check out your new logo.svg.') 
+    });
+        })
 }
 
 // Function call to initialize app
