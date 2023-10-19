@@ -10,10 +10,9 @@ const questions = [
       name: 'text',
     },
     {
-        type: 'list',
-        message: 'What color do you want your text to be?',
+        type: 'input',
+        message: 'What color do you want your text to be? Enter a color keyword or hexadecimal number.',
         name: 'colorText',
-        choices: ["red", "orange", "yellow", "green", "blue", "purple"]
     },
     {
         type: 'list',
@@ -22,10 +21,9 @@ const questions = [
         choices: ["circle", "triangle", "square"]
     },
     {
-        type: 'list',
-        message: 'What color do you want your logo to be?',
+        type: 'input',
+        message: 'What color do you want your logo to be? Enter a color keyword or hexadecimal number.',
         name: 'colorLogo',
-        choices: ["red", "orange", "yellow", "green", "blue", "purple"]
     },
 ]
 
@@ -59,9 +57,15 @@ function init() {
     inquirer.prompt(questions)
     .then(data => {
         console.log(data);
+
+        // Checks to see that the password is 3 chars or less
+        if(data.text.length > 3) {
+           return console.log('Error: Please enter 3 or less characters');
+        }
+
         generateSVG(data.shape, data.text, data.colorText, data.colorLogo);
         // writes svg file
-            fs.writeFile('./logo.svg', generateSVG(data.shape, data.text, data.colorText, data.colorLogo), (err) => {
+            fs.writeFile('./examples/logo.svg', generateSVG(data.shape, data.text, data.colorText, data.colorLogo), (err) => {
                 err ? console.log(err) : console.log('Success! Check out your new logo.svg.') 
     });
         })

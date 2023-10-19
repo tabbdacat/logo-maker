@@ -1,8 +1,0 @@
- <svg viewbox="0 0 300 200">
-
-
-
-        <polygon points="150, 18 244, 182 56, 182" fill="purple" />
-
-
-    <text x="150" y="100" text-anchor="middle" alignment-baseline="middle" fill="green" font-size="40">tcp</text>
