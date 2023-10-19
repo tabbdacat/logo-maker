@@ -66,7 +66,7 @@ function init() {
             generateSVG(data.shape, data.text, data.colorText, data.colorLogo);
             // writes svg file
             fs.writeFile('./examples/logo.svg', generateSVG(data.shape, data.text, data.colorText, data.colorLogo), (err) => {
-                err ? console.log(err) : console.log('Success! Check out your new logo.svg.')
+                err ? console.log(err) : console.log('Generated logo.svg');
             });
         })
 }
